@@ -50,8 +50,47 @@ Seguire i seguenti passi per importare la libreria su Arduino:
 
 Così facendo, sarà possibile utilizzare gli examples della libreria direttamente da Arduino IDE.
 ### node-coap
+Prerequisito unico per poter utilizzare questa libreria sul server (Raspberry Pi) è installare NodeJS. 
+Per farlo, aprire una shell e digitare
+```
+sudo apt install nodejs
+```
+Una volta fatto ciò, verificare che l'installazione sia andata a buon fine digitando
+```
+nodejs --version
+```
+```
+npm --version 
+```
+Se per entrambi i comandi è possibile verificare la versione, scaricare la libreria node-coap utilizzando il seguente comando 
+```
+npm install coap
+```
+### Test delle librerie CoAP
+Per svolgere il test sulle librerie scelte, andare ad utilizzare i codici così come segue.
+Aprire Arduino IDE ed andare su ``` File-> Examples-> Thing.CoAP-> ESP-32-> Server-InlineEndpoints```
+Verrà caricato il codice di esempio della libreria sulla finestra dell'IDE: questo inizializzerà un server CoAP con le risorse /Button (accessibile via richiesta GET) e /LED (accessibile via richieste GET o POST)
+Andare quindi a modificare l'SSID e la password della rete Wi-Fi precedentemente predisposta
+Caricato il codice ed effettuate le seguenti modifiche, collegare l'ESP32 al computer tramite la porta COM designata e selezionare il modulo ESP32-WROOM-DA Module, dopodiché andare ad effettuare l'Upload del codice sul device constrained.
+Terminato l'upload con successo, aprire il Serial Monitor dall'IDE, selezionare il baud rate a 115200 e verificare se si connette alla rete: in caso di esito positivo, verrà mostrato l'indirizzo IP da 
+Sul Raspberry Pi andare a copiare il seguente codice JavaScript in un file ```client.js```
+```
+const coap = require("coap");
 
-### Test delle librerie utilizzate
+const client = new coap.Client();
+
+const res = await client.get("coap://<<your_IP>>:5683/<<your_resource>>");
+
+console.log("Risposta:", res);
+
+```
+Successivamente, andare ad eseguire nello stesso percorso in cui si trova il file ```client.js``` il seguente comando:
+```
+node client.js
+```
+Così facendo, verrà inizializzato un server coap sulla porta 5683 che andrà ad avere le risorse ```/co2``` ,```/temperature```,```/humidity```: questi ritorneranno dei valori randomici con boundary definiti nel codice.
+A seguire, bisogna andare ad inserire il codice lato client.
+
 
 
 
