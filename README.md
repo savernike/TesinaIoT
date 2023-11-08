@@ -43,10 +43,10 @@ https://github.com/Alv3s/Thing.CoAP
 Questa libreria permetterà di programmare un CoAP client sull'ESP-32.
 Seguire i seguenti passi per importare la libreria su Arduino:
 1. Aprire Arduino IDE
-2. Andare su Sketch -> Include Library -> Add Zip Library
+2. Andare su ```Sketch -> Include Library -> Add Zip Library```
 3. Cercare il percorso in cui si è scaricata la libreria e cliccare apri
 4. Riavviare Arduino IDE
-5. Verificare che la libreria sia presente andando su File -> Examples: qui sarà presente Thing.CoAP tra gli Examples of Custom Libraries
+5. Verificare che la libreria sia presente andando su ```File -> Examples```: qui sarà presente Thing.CoAP tra gli Examples of Custom Libraries
 
 Così facendo, sarà possibile utilizzare gli examples della libreria direttamente da Arduino IDE.
 ### node-coap
