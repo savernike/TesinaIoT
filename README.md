@@ -17,7 +17,7 @@ Scaricare il file compatibile con il sistema operativo del computer attualmente 
 
 ### Driver per porte COM-USB
 In caso non dovessero essere presenti, è necessario scaricare i driver per utilizzare le porte COM dal seriale USB. 
-Il driver viene incluso nella repository corrente o comunque scaricabile dal sito ufficiale al seguente link:
+Il driver viene incluso nella repository corrente (al folder ```CP210x_Universal_Windows_Driver``` valido per Windows) o comunque scaricabile dal sito ufficiale al seguente link:
 ```
 https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads
 ```
@@ -36,6 +36,7 @@ Per l'utilizzo di alcune delle librerie sotto citate, è necessario scaricare CM
 
 ## Librerie CoAP usate
 Le librerie qui elencate sono state scelte dopo una serie di confronti e risultate essere più consone all'obiettivo finale.
+
 ### Thing.CoAP
 La libreria può essere scaricata qui di seguito o alla seguente repository GitHub: 
 ```
@@ -50,6 +51,7 @@ Seguire i seguenti passi per importare la libreria su Arduino:
 5. Verificare che la libreria sia presente andando su ```File -> Examples```: qui sarà presente Thing.CoAP tra gli Examples of Custom Libraries
 
 Così facendo, sarà possibile utilizzare gli examples della libreria direttamente da Arduino IDE.
+
 ### node-coap
 Prerequisito unico per poter utilizzare questa libreria sul server (Raspberry Pi) è installare NodeJS. 
 Per farlo, aprire una shell e digitare
@@ -77,12 +79,12 @@ Verrà caricato il codice di esempio della libreria sulla finestra dell'IDE: que
 
 Andare quindi a modificare l'SSID e la password della rete Wi-Fi precedentemente predisposta.
 
-Caricato il codice ed effettuate le seguenti modifiche, collegare l'ESP-32 al computer tramite la porta COM designata e selezionare il modulo ESP-32-WROOM-DA Module, dopodiché andare ad effettuare l'Upload del codice sul device constrained.
+Caricato il codice ed effettuate le seguenti modifiche, collegare l'ESP-32 al computer tramite la porta COM designata e selezionare il modulo ESP-32-WROOM-DA Module, dopodiché andare ad effettuare l'upload del codice sul device constrained.
 
 Terminato l'upload con successo, aprire il Serial Monitor dall'IDE, selezionare il baud rate a 115200 e verificare se si connette alla rete: in caso di esito positivo, verrà mostrato l'indirizzo IP nel Serial Monitor.
 
 #### Caricare codice sul Client
-Sul Raspberry Pi, andare a copiare il codice JavaScript ```Librerie CoAP/client.js```
+Sul Raspberry Pi, andare a copiare il codice JavaScript presente al percorso ```Librerie CoAP/client.js``` della repository
 
 Successivamente, andare ad eseguire nello stesso percorso in cui è stato copiato il file ```client.js``` il seguente comando:
 ```
@@ -99,6 +101,7 @@ Questa libreria è stata scelta in quanto permette di effettuare comunicazioni c
 
 ### Instaurazione Server LWM2M
 I seguenti passi servono per la creazione del server Wakaama sul Raspberry Pi.
+
 #### Installazione
 Per installare la libreria dalla repository GitHub, scrivere il seguente codice sul Raspberry Pi  
 ```
@@ -114,8 +117,10 @@ Successivamente, andare nella cartella appena creata ed eseguire i seguenti coma
 
 Inserire il percorso in cui è stata installata la repository al posto di ```[wakaama directory]```.
 Verranno creati i file del CMakeList e l'eseguibile ```lwm2mserver```.
+
 ### Instaurazione Client LWM2M
 I seguenti passi servono per la creazione del client Wakaama sull'ESP-32.
+
 #### Installazione
 Scaricare sul desktop a cui è collegato l'ESP-32 la libreria di Wakaama modificata per l'ESP-32.
 
@@ -130,12 +135,12 @@ Aprire la repository appena scaricata con Visual Studio Code (in cui era stato p
 Successivamente, andare nel file ```platformio.ini``` e inserire SSID e password del Wi-Fi in uso (rispettivamente nelle keys ```DWIFI_SSID``` e ```DWIFI_PASSWORD```).
 
 Fatto ciò, andare a modificare il file ```LwM2mManager.h``` inserendo l'IP del Server alla variabile ```*server``` (l'IP del server sarà ottenibile una volta lanciato l'eseguibile sul Raspberry Pi).
+
 ### Test Client-Server
 Sul Raspberry Pi, andare alla cartella ```build``` precedentemente creata ed eseguire il seguente comando
 ```
 ./lwm2mserver -h
 ```
-
 Qualora tutto funzionasse correttamente, verrà aperta una shell del server in cui sarà possibile lanciare dei comandi.
 
 Effettuare, dunque, i seguenti passi:
@@ -162,15 +167,3 @@ Per effettuare lo sniffing nella comunicazione client-server, bisogna eseguire i
 3. Avviare Wireshark e andare su ```File -> Apri```
 4. Si aprirà una finestra di dialogo per importare il file .pcap prima ottenuto
 5. Una volta importato, sarà possibile vedere il traffico client-server scambiato sulla GUI
-
-
-
-
-
-
-
-
-
-
-
-
