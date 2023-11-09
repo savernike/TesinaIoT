@@ -71,7 +71,7 @@ npm install coap
 Per svolgere il test sulle librerie scelte, andare ad utilizzare i codici così come segue.
 
 #### Caricare codice sul Server
-Aprire Arduino IDE ed andare su ``` File-> Examples-> Thing.CoAP-> ESP-32-> Server-InlineEndpoints```
+Aprire Arduino IDE ed andare su ``` File -> Examples -> Thing.CoAP -> ESP-32 -> Server-InlineEndpoints```
 
 Verrà caricato il codice di esempio della libreria sulla finestra dell'IDE: questo inizializzerà un server CoAP con le risorse /Button (accessibile via richiesta GET) e /LED (accessibile via richieste GET o POST).
 
@@ -158,7 +158,7 @@ Per effettuare lo sniffing nella comunicazione client-server, bisogna eseguire i
    sudo tcpdump -i any -n 'udp port 5683 and host <<your_ip>>' -s 0 -w sniffing.pcap
    ```
 2. Catturati i pacchetti, questi saranno esportati nel file ```sniffing.pcap```
-3. Avviare Wireshark e andare su ```File-> Apri```
+3. Avviare Wireshark e andare su ```File -> Apri```
 4. Si aprirà una finestra di dialogo per importare il file .pcap prima ottenuto
 5. Una volta importato, sarà possibile vedere il traffico client-server scambiato sulla GUI
 
