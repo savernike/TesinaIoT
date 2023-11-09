@@ -22,7 +22,7 @@ Il driver viene incluso nella repository corrente o comunque scaricabile dal sit
 https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads
 ```
 ### Rete wireless
-Per effettuare le comunicazioni client-server, è necessario usufruire di una rete Wi-Fi a 2.4GHz di cui si conoscono SSID e password: la frequenza prima indicata è dovuta dal fatto che l'ESP-32 sopra descritto non riesca ad associarsi ad una rete Wi-Fi con frequenza di 5GHz.
+Per effettuare le comunicazioni client-server, è necessario usufruire di una rete Wi-Fi a 2.4GHz di cui si conoscono SSID e password: la frequenza prima indicata è dovuta al fatto che l'ESP-32 sopra descritto non riesca ad associarsi ad una rete Wi-Fi con frequenza di 5GHz.
 
 Potrebbe essere, inoltre, necessario poter aprire le port 5683 e 56830 del router: queste ultime serviranno per far comunicare client e server utilizzando il protocollo CoAP (anche se in tutti i codici che vedremo successivamente è possibile definire le port di comunicazione in maniera dinamica).
 
@@ -157,6 +157,7 @@ Per effettuare lo sniffing nella comunicazione client-server, bisogna eseguire i
    ```
    sudo tcpdump -i any -n 'udp port 5683 and host <<your_ip>>' -s 0 -w sniffing.pcap
    ```
+   Sostituire ```<<your_ip>>``` con l'indirizzo IP dell'ESP-32 ottenibile dal Serial Monitor di Visual Studio Code
 2. Catturati i pacchetti, questi saranno esportati nel file ```sniffing.pcap```
 3. Avviare Wireshark e andare su ```File -> Apri```
 4. Si aprirà una finestra di dialogo per importare il file .pcap prima ottenuto
