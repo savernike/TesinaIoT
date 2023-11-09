@@ -23,6 +23,7 @@ https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads
 ```
 ### Rete wireless
 Per effettuare le comunicazioni client-server, è necessario usufruire di una rete Wi-Fi a 2.4GHz di cui si conoscono SSID e password: la frequenza prima indicata è dovuta dal fatto che l'ESP-32 sopra descritto non riesca ad associarsi ad una rete Wi-Fi con frequenza di 5GHz.
+
 Potrebbe essere, inoltre, necessario poter aprire le port 5683 e 56830 del router: queste ultime serviranno per far comunicare client e server utilizzando il protocollo CoAP (anche se in tutti i codici che vedremo successivamente è possibile definire le port di comunicazione in maniera dinamica)
 
 ### Software necessari per lo sviluppo
@@ -68,31 +69,26 @@ npm install coap
 ```
 ### Test delle librerie CoAP
 Per svolgere il test sulle librerie scelte, andare ad utilizzare i codici così come segue.
+
+#### Caricare codice sul Server
 Aprire Arduino IDE ed andare su ``` File-> Examples-> Thing.CoAP-> ESP-32-> Server-InlineEndpoints```
-Verrà caricato il codice di esempio della libreria sulla finestra dell'IDE: questo inizializzerà un server CoAP con le risorse /Button (accessibile via richiesta GET) e /LED (accessibile via richieste GET o POST)
-Andare quindi a modificare l'SSID e la password della rete Wi-Fi precedentemente predisposta
+
+Verrà caricato il codice di esempio della libreria sulla finestra dell'IDE: questo inizializzerà un server CoAP con le risorse /Button (accessibile via richiesta GET) e /LED (accessibile via richieste GET o POST).
+
+Andare quindi a modificare l'SSID e la password della rete Wi-Fi precedentemente predisposta.
+
 Caricato il codice ed effettuate le seguenti modifiche, collegare l'ESP32 al computer tramite la porta COM designata e selezionare il modulo ESP32-WROOM-DA Module, dopodiché andare ad effettuare l'Upload del codice sul device constrained.
-Terminato l'upload con successo, aprire il Serial Monitor dall'IDE, selezionare il baud rate a 115200 e verificare se si connette alla rete: in caso di esito positivo, verrà mostrato l'indirizzo IP da 
-Sul Raspberry Pi andare a copiare il seguente codice JavaScript in un file ```client.js```
-```
-const coap = require("coap");
 
-const client = new coap.Client();
+Terminato l'upload con successo, aprire il Serial Monitor dall'IDE, selezionare il baud rate a 115200 e verificare se si connette alla rete: in caso di esito positivo, verrà mostrato l'indirizzo IP nel Serial Monitor.
 
-const res = await client.get("coap://<<your_IP>>:5683/<<your_resource>>");
+#### Caricare codice sul Client
+Sul Raspberry Pi, andare a copiare il codice JavaScript ```Librerie CoAP/client.js```
 
-console.log("Risposta:", res);
-
-```
-Successivamente, andare ad eseguire nello stesso percorso in cui si trova il file ```client.js``` il seguente comando:
+Successivamente, andare ad eseguire nello stesso percorso in cui è stato copiato il file ```client.js``` il seguente comando:
 ```
 node client.js
 ```
-Così facendo, verrà inizializzato un server coap sulla porta 5683 che andrà ad avere le risorse ```/co2``` ,```/temperature```,```/humidity```: questi ritorneranno dei valori randomici con boundary definiti nel codice.
-A seguire, bisogna andare ad inserire il codice lato client.
+Sostituire ```<<your_ip>>``` con l'indirizzo IP ottenuto in precedenza nel Serial Monitor di Arduino.
 
-
-
-
- 
+Così facendo, verrà inizializzato un client CoAP sulla porta 5683 che andrà ad effettuare una richiesta GET alla risorsa ```/Button```: verrà quindi stampata la risposta sulla shell.
 
