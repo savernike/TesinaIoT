@@ -139,17 +139,30 @@ Sul Raspberry Pi, andare alla cartella ```build``` precedentemente creata ed ese
 Qualora tutto funzionasse correttamente, verrà aperta una shell del server in cui sarà possibile lanciare dei comandi.
 
 Effettuare, dunque, i seguenti passi:
-1. andare su Visual Studio Code
-2. connettere l'ESP-32 al computer
-3. selezionare nell'IDE la porta COM da utilizzare
-4. effettuare la build della libreria scaricata
-5. eseguire l'upload.
+1. Andare su Visual Studio Code
+2. Connettere l'ESP-32 al computer
+3. Selezionare nell'IDE la porta COM da utilizzare
+4. Effettuare la build della libreria scaricata
+5. Eseguire l'upload
 
 A questo punto, il client sull'ESP-32 si connetterà alla rete internet e andrà ad effettuare una richiesta di registrazione al server.
 
 Di contro, nel server sarà possibile verificare la connessione client-server nella shell.
 
 Inoltre, sarà possibile utilizzare una serie di comandi della shell del server digitando il comando ```help```.
+
+## Packet Sniffing
+Per effettuare lo sniffing nella comunicazione client-server, bisogna eseguire i seguenti passi:
+1. Dopo l'avvio di client e server Wakaama, è stato lanciato il seguente comando per sniffare il traffico
+   ```
+   sudo tcpdump -i any -n 'udp port 5683 and host <<your_ip>>' -s 0 -w sniffing.pcap
+   ```
+2. Catturati i pacchetti, questi saranno esportati nel file ```sniffing.pcap```
+3. Avviare Wireshark e andare su ```File-> Apri```
+4. Si aprirà una finestra di dialogo per importare il file .pcap prima ottenuto
+5. Una volta importato, sarà possibile vedere il traffico client-server scambiato sulla GUI
+
+
 
 
 
