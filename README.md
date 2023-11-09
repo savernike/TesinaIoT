@@ -77,7 +77,7 @@ Verrà caricato il codice di esempio della libreria sulla finestra dell'IDE: que
 
 Andare quindi a modificare l'SSID e la password della rete Wi-Fi precedentemente predisposta.
 
-Caricato il codice ed effettuate le seguenti modifiche, collegare l'ESP32 al computer tramite la porta COM designata e selezionare il modulo ESP32-WROOM-DA Module, dopodiché andare ad effettuare l'Upload del codice sul device constrained.
+Caricato il codice ed effettuate le seguenti modifiche, collegare l'ESP-32 al computer tramite la porta COM designata e selezionare il modulo ESP-32-WROOM-DA Module, dopodiché andare ad effettuare l'Upload del codice sul device constrained.
 
 Terminato l'upload con successo, aprire il Serial Monitor dall'IDE, selezionare il baud rate a 115200 e verificare se si connette alla rete: in caso di esito positivo, verrà mostrato l'indirizzo IP nel Serial Monitor.
 
@@ -113,6 +113,7 @@ Successivamente, andare nella cartella appena creata ed eseguire i seguenti coma
  * ``make``
 
 Inserire il percorso in cui è stata installata la repository al posto di ```[wakaama directory]```.
+Verranno creati i file del CMakeList e l'eseguibile ```lwm2mserver```.
 ### Instaurazione Client LWM2M
 I seguenti passi servono per la creazione del client Wakaama sull'ESP-32.
 #### Installazione
@@ -129,7 +130,26 @@ Aprire la repository appena scaricata con Visual Studio Code (in cui era stato p
 Successivamente, andare nel file ```platformio.ini``` e inserire SSID e password del Wi-Fi in uso (rispettivamente nelle keys ```DWIFI_SSID``` e ```DWIFI_PASSWORD```).
 
 Fatto ciò, andare a modificare il file ```LwM2mManager.h``` inserendo l'IP del Server alla variabile ```*server``` (l'IP del server sarà ottenibile una volta lanciato l'eseguibile sul Raspberry Pi).
+### Test Client-Server
+Sul Raspberry Pi, andare alla cartella ```build``` precedentemente creata ed eseguire il seguente comando
+```
+./lwm2mserver -h
+```
 
+Qualora tutto funzionasse correttamente, verrà aperta una shell del server in cui sarà possibile lanciare dei comandi.
+
+Effettuare, dunque, i seguenti passi:
+1. andare su Visual Studio Code
+2. connettere l'ESP-32 al computer
+3. selezionare nell'IDE la porta COM da utilizzare
+4. effettuare la build della libreria scaricata
+5. eseguire l'upload.
+
+A questo punto, il client sull'ESP-32 si connetterà alla rete internet e andrà ad effettuare una richiesta di registrazione al server.
+
+Di contro, nel server sarà possibile verificare la connessione client-server nella shell.
+
+Inoltre, sarà possibile utilizzare una serie di comandi della shell del server digitando il comando ```help```.
 
 
 
