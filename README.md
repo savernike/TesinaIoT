@@ -92,3 +92,51 @@ Sostituire ```<<your_ip>>``` con l'indirizzo IP ottenuto in precedenza nel Seria
 
 Così facendo, verrà inizializzato un client CoAP sulla porta 5683 che andrà ad effettuare una richiesta GET alla risorsa ```/Button```: verrà quindi stampata la risposta sulla shell.
 
+## Implementazione CoAP con Wakaama
+Dopo aver testato le librerie CoAP, si può andare ad effettuare il testing client-server utilizzando la libreria Wakaama.
+
+Questa libreria è stata scelta in quanto permette di effettuare comunicazioni client-server usando il formato JSON di OMA-LWM2M.
+
+### Instaurazione Server LWM2M
+I seguenti passi servono per la creazione del server Wakaama sul Raspberry Pi.
+#### Installazione
+Per installare la libreria dalla repository GitHub, scrivere il seguente codice sul Raspberry Pi  
+```
+git clone --recurse-submodules https://github.com/eclipse/wakaama.git
+```
+
+#### Inizializzazione
+Una volta installata, andare nella cartella della repository e creare una cartella ```build```, nella quale andranno gli eseguibili compilati con CMake.
+
+Successivamente, andare nella cartella appena creata ed eseguire i seguenti comandi
+ * ``cmake [wakaama directory]/examples/server``
+ * ``make``
+
+Inserire il percorso in cui è stata installata la repository al posto di ```[wakaama directory]```.
+### Instaurazione Client LWM2M
+I seguenti passi servono per la creazione del client Wakaama sull'ESP-32.
+#### Installazione
+Scaricare sul desktop a cui è collegato l'ESP-32 la libreria di Wakaama modificata per l'ESP-32.
+
+Per farlo, aprire un terminale e digitare il seguente comando 
+```
+https://github.com/antonzk/lwm2m-esp.git
+```
+
+#### Inizializzazione
+Aprire la repository appena scaricata con Visual Studio Code (in cui era stato precedentemente scaricato PlatformIO).
+
+Successivamente, andare nel file ```platformio.ini``` e inserire SSID e password del Wi-Fi in uso (rispettivamente nelle keys ```DWIFI_SSID``` e ```DWIFI_PASSWORD```).
+
+Fatto ciò, andare a modificare il file ```LwM2mManager.h``` inserendo l'IP del Server alla variabile ```*server``` (l'IP del server sarà ottenibile una volta lanciato l'eseguibile sul Raspberry Pi).
+
+
+
+
+
+
+
+
+
+
+
