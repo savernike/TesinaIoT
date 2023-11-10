@@ -1,5 +1,6 @@
 # TesinaIoT
 Repository per progetto IoT
+![Schema di Rete](https://github.com/savernike/TesinaIoT/blob/master/network-schema.drawio.png)
 ## Materiale
 Le componenti elettroniche utilizzate per la realizzazione del progetto assegnatoci sono: 
 - Raspberry Pi 3A+, un device non-constrained che funge da LWM2M Server
